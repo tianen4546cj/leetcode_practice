@@ -1,0 +1,29 @@
+//Iteratively solve
+
+import java.util.ArrayList;
+
+/**
+ * Definition for binary tree
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public ArrayList<Integer> postorderTraversal(TreeNode root) {
+        if (root == null) {
+            return new ArrayList<Integer>();
+        }
+        ArrayList<Integer> array = new ArrayList<Integer>();
+        if (root.left != null) {
+            array.addAll(postorderTraversal(root.left));
+        }
+        if (root.right != null) {
+            array.addAll(postorderTraversal(root.right));
+        }
+        array.add(root.val);
+        return array;
+    }
+}
