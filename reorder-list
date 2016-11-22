@@ -1,0 +1,35 @@
+#本地通过，leetcode未通过
+
+public static void reorderList(ListNode head) {
+        if (head == null || head.next == null){
+            return;
+        }else{
+
+            ListNode first = head;
+            while(first.next != null && first.next.next != null)
+            {
+
+                ListNode recNil = head;
+                ListNode nil = head.next;
+                while(nil.next != null) {
+                    recNil = recNil.next;
+                    nil = nil.next;
+                }
+                if (first.next == nil || first == nil) {
+                    return;
+                }else{
+                    nil.next = first.next;
+                    first.next = nil;
+                    recNil.next = null;
+                    first = first.next.next;
+                }
+
+            }
+        }
+
+    }
+    
+    
+ #链表反转解法
+ 
+ 待写
