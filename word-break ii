@@ -1,0 +1,51 @@
+import java.util.*;
+
+public class Solution {
+    public ArrayList<String> wordBreak(String s, Set<String> dict) {
+        int length = s.length();
+        List<String> dp[] = new ArrayList[length + 1];
+        dp[0] = new ArrayList<String>();
+        for(int i = 0; i < s.length() + 1; i++) {
+            for(int j = 0; j < i; j++) {
+                String string = s.substring(j,i);
+                if(dp[j] != null && dict.contains(string)) {
+                    if(dp[i] == null)
+                        dp[i] = new ArrayList<String>();
+                    dp[i].add(string);
+                }
+
+            }
+        }
+
+        
+        
+    ArrayList<String> answer = new ArrayList<>();
+
+        
+        		if(dp[s.length()] == null) return answer; 
+
+    List<String> temp = new ArrayList<>();
+
+    dfs(dp, length, temp, answer);
+
+    return answer;
+}
+
+    public void dfs(List<String> dp[], int end, List<String> temp, ArrayList<String> answer) {
+
+        if(end <= 0){
+			String ans = temp.get(temp.size()-1);
+			for(int i=temp.size()-2; i>=0; i--)
+				ans += (" " + temp.get(i) );
+			answer.add(ans);
+			return;
+		}
+
+        for(String str:dp[end]){
+			temp.add(str);
+			dfs(dp,end-str.length(), temp, answer);
+			temp.remove(temp.size()-1);
+		}
+
+    }
+}
