@@ -1,5 +1,7 @@
 import java.util.*;
 
+# 同word-break，用dfs遍历出每一条语句
+
 public class Solution {
     public ArrayList<String> wordBreak(String s, Set<String> dict) {
         int length = s.length();
