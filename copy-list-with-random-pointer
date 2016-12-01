@@ -1,0 +1,37 @@
+public RandomListNode copyRandomList(RandomListNode head) {
+        if(head == null) return null;
+        RandomListNode old = head;
+        RandomListNode node = new RandomListNode(old.label);
+        node.next = null;
+        RandomListNode newNode = node;
+        while(old.next != null){
+        	old = old.next;
+        	RandomListNode node2 = new RandomListNode(old.label);
+            node2.next = null;
+        	newNode.next = node2;
+            newNode = newNode.next;
+        }
+        
+        RandomListNode old3 = head;
+        RandomListNode newNode3 = node;
+
+        while(old3 != null) {
+            if (old3.random != null){
+            	RandomListNode old2 = head;
+           		RandomListNode newNode2 = node;
+            	while(!old3.random.equals(old2)){
+                	old2 = old2.next;
+                	newNode2 = newNode2.next;
+            	}
+         	    newNode3.random = newNode2;
+            } else {
+            	newNode3.random = null;
+            }
+           
+         	newNode3 = newNode3.next;
+            old3 = old3.next;
+        }
+        
+        
+        return node;
+    }
