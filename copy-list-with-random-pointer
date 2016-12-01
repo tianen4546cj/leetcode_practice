@@ -1,3 +1,12 @@
+/**
+ * Definition for singly-linked list with a random pointer.
+ * class RandomListNode {
+ *     int label;
+ *     RandomListNode next, random;
+ *     RandomListNode(int x) { this.label = x; }
+ * };
+ */
+
 public RandomListNode copyRandomList(RandomListNode head) {
         if(head == null) return null;
         RandomListNode old = head;
@@ -35,3 +44,35 @@ public RandomListNode copyRandomList(RandomListNode head) {
         
         return node;
     }
+    
+ ### 牛客上的解法：将新旧list串联在一起，即可获取random指针的位置，巧妙！！！
+    public RandomListNode copyRandomList(RandomListNode head) {
+    if(head == null || (head.next == null && head.random == null)){
+        return head;
+    }
+    RandomListNode node = head;
+    while(node != null){
+        RandomListNode copyNode = copyOf(node);
+        node.next = copyNode;
+        node = node.next.next;
+    }
+    node = head.next;
+    while(node != null){
+        if(node.next != null){
+            node.next = node.next.next;
+        }
+        if(node.random != null){
+            node.random  = node.random.next;
+        }
+        node = node.next;
+    }
+ 
+    return head.next;
+}
+private RandomListNode copyOf(RandomListNode node) {
+    // TODO Auto-generated method stub
+    RandomListNode res = new RandomListNode(node.label);
+    res.next = node.next;
+    res.random = node.random;
+    return res;
+}
