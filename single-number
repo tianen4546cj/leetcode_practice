@@ -1,0 +1,16 @@
+# 正确解法应为使用异或运算，遍历一遍即可
+public class Solution {
+    public int singleNumber(int[] A) {
+        for(int a : A) {
+            int count = 0;
+            for(int b : A) {
+                if ( a == b )
+                    count++;
+            }
+            if (count == 1)
+                return a;
+        }
+            return 0;
+
+    }
+}
