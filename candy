@@ -1,0 +1,34 @@
+#动态规划 o（n^2)
+public class Solution {
+    public int candy(int[] ratings) {
+        int length = ratings.length;
+        int[] candies = new int[length];
+        int pos = 0;
+        candies[0] = 1;
+        for(int i = 1; i < candies.length; i++) {
+            if(ratings[i] > ratings[i-1]) {
+                candies[i] = candies[i-1]+1;
+            }
+            if(ratings[i] == ratings[i-1]) {
+                candies[i] = 1;
+            }
+            if(ratings[i] < ratings[i-1]) {
+                candies[i] = 1;
+                int j = i;
+                while(candies[j-1] == candies[j] && ratings[j-1] > ratings[j]) {
+                    candies[j-1] += 1;
+                    if(j == 1)
+                        break;
+                    j--;
+                }
+            }        
+        }
+        int count = 0;
+        for(int cd : candies) {
+            count += cd;
+        }
+        return count;
+    }
+}
+
+#便捷方式，左右各遍历一次：o（n）
